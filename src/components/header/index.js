@@ -6,7 +6,7 @@ export default class Header extends Component {
 	render() {
 		return (
 			<header class={style.header}>
-				<h1>Your computer, as your browser sees it</h1>
+				<h1>youare.exposed</h1>
 				<nav>
 					{/*<Link href="/">Home</Link>
 					<Link href="/profile">Me</Link>

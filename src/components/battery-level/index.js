@@ -27,7 +27,7 @@ export default class BatteryLevel extends Component {
 	updateLevelInfo(){
 	  console.log("Battery level: "
 				  + this.battery.level * 100 + "%");
-	  this.setState({ level: this.battery.level });
+	  this.setState({ level: this.battery.level.toFixed(1) });
 	}
 
 	updateChargeInfo(){
@@ -55,7 +55,7 @@ export default class BatteryLevel extends Component {
 	render({}, { level }) {
 		return (
 			<div class={style.battery}>
-				<meter max="1.0" min="0.0" value={ level } low=".25" optimum="0.5"></meter>
+				<meter max="1.0" min="0.0" value={ level } low=".30" optimum="0.5"></meter>
 				<label>Battery at { level * 100 }%</label>
 			</div>
 		);

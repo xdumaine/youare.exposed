@@ -5,6 +5,10 @@ import System from '../system';
 import BatteryLevel from '../battery-level';
 import DoNotTrack from '../do-not-track';
 import IpAddresses from '../ip-addresses';
+import Location from '../location';
+
+import adapter from 'webrtc-adapter';
+window.adapter = adapter;
 
 export default class Home extends Component {
 	render() {
@@ -14,6 +18,8 @@ export default class Home extends Component {
 				<BatteryLevel/>
 				<DoNotTrack/>
 				<IpAddresses/>
+				<Location/>
+				<Location map="map"/>
 			</div>
 		);
 	}
