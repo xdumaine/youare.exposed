@@ -8,6 +8,7 @@ import IpAddresses from '../ip-addresses';
 import Location from '../location';
 import Motion from '../motion';
 import Network from '../network';
+import Devices from '../devices';
 
 import adapter from 'webrtc-adapter';
 window.adapter = adapter;
@@ -19,6 +20,7 @@ export default class Home extends Component {
 				<System/>
 				<BatteryLevel/>
 				<Network/>
+				<Devices/>
 				<DoNotTrack/>
 				<IpAddresses/>
 				<Motion/>
