@@ -47,6 +47,10 @@ export default class Location extends Component {
 
 	// Note: `user` comes from the URL, courtesy of our router
 	render({}, { location }) {
+		if (!location) {
+			return null;
+		}
+
 		if (this.props.map === "map") {
 			return (
 				<div class={style.map}>
@@ -54,18 +58,15 @@ export default class Location extends Component {
 					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuzBX3VW1x1ThzSgvF33lYx0ISuP0pdY0&callback=initMap"></script>
 				</div>
 			);
-		} else {
-			const data = !this.state.location ? null : (
+		}
+
+		return (
+			<div class={style.location}>
 				<div>
 					<div>Lat: { location.lat }</div>
 					<div>Lng: { location.lng }</div>
 				</div>
-			);
-			return (
-				<div class={style.location}>
-					{ data }
-				</div>
-			);
-		}
+			</div>
+		);
 	}
 }

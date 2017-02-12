@@ -8,10 +8,16 @@ export default class Motion extends Component {
 		lastMotion: new Date().getTime()
 	};
 
-	detectMotion () {
+	detectMotion (e) {
 		const previousMotion = this.state.lastMotion;
 		const now = new Date().getTime();
-		this.setState({ moving: now - previousMotion < 1000 });
+		const timeDiff = now - previousMotion;
+
+		if (e && (Math.abs(e.acceleration.x) + Math.abs(e.acceleration.y) + Math.abs(e.acceleration.z)) > 1) {
+			console.log('Motion event', timeDiff, e);
+			this.setState({ lastMotion: now });
+		}
+		this.setState({ moving: timeDiff < 1000 });
 	}
 
 	componentDidMount() {

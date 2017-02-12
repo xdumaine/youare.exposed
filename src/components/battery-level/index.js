@@ -3,7 +3,8 @@ import style from './style';
 
 export default class BatteryLevel extends Component {
 	state = {
-		level: 1
+		level: 1,
+		charging: false
 	};
 
 	updateAllBatteryInfo() {
@@ -33,6 +34,7 @@ export default class BatteryLevel extends Component {
 	updateChargeInfo(){
 	  console.log("Battery charging? "
 				  + (this.battery.charging ? "Yes" : "No"));
+	  this.setState({charging: this.battery.charging });
 	}
 
 	componentDidMount() {
@@ -52,11 +54,14 @@ export default class BatteryLevel extends Component {
 	}
 
 	// Note: `user` comes from the URL, courtesy of our router
-	render({}, { level }) {
+	render({}, { level, charging }) {
+		const isCharging = charging ? 'charging' : 'not charging'
 		return (
 			<div class={style.battery}>
 				<meter max="1.0" min="0.0" value={ level } low=".30" optimum="0.5"></meter>
-				<label>Battery at { level * 100 }%</label>
+				<label>Battery at { level * 100 }%
+				</label>
+				<span class="charging"> ({isCharging}) </span>
 			</div>
 		);
 	}

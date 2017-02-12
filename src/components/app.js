@@ -21,6 +21,7 @@ export default class App extends Component {
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
 				</Router>
+				<center> Plenty of inspiration from <a href="http://webkay.robinlinus.com/">webkay</a></center>
 			</div>
 		);
 	}
