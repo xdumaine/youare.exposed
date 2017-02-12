@@ -9,6 +9,7 @@ import Location from '../location';
 import Motion from '../motion';
 import Network from '../network';
 import Devices from '../devices';
+import GetUserMedia from '../get-user-media';
 
 import adapter from 'webrtc-adapter';
 window.adapter = adapter;
@@ -26,6 +27,7 @@ export default class Home extends Component {
 				<Motion/>
 				<Location/>
 				<Location map="map"/>
+				<GetUserMedia/>
 			</div>
 		);
 	}
