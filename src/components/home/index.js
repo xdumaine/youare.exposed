@@ -10,6 +10,7 @@ import Motion from '../motion';
 import Network from '../network';
 import Devices from '../devices';
 import GetUserMedia from '../get-user-media';
+import Vibrate from '../vibrate';
 
 import adapter from 'webrtc-adapter';
 window.adapter = adapter;
@@ -28,6 +29,7 @@ export default class Home extends Component {
 				<Location/>
 				<Location map="map"/>
 				<GetUserMedia/>
+				<Vibrate/>
 			</div>
 		);
 	}
