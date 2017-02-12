@@ -55,13 +55,13 @@ export default class BatteryLevel extends Component {
 
 	// Note: `user` comes from the URL, courtesy of our router
 	render({}, { level, charging }) {
-		const isCharging = charging ? 'charging' : 'not charging'
+		const battery = charging ? 'battery_charging_full' : (level < 0.3 ? 'battery_alert' : 'battery_std');
 		return (
 			<div class={style.battery}>
+
 				<meter max="1.0" min="0.0" value={ level } low=".30" optimum="0.5"></meter>
-				<label>Battery at { level * 100 }%
+				<label><icon class="ico">{ battery }</icon> { level * 100 }%
 				</label>
-				<span class="charging"> ({isCharging}) </span>
 			</div>
 		);
 	}
