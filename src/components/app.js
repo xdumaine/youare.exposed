@@ -3,7 +3,7 @@ import { Router } from 'preact-router';
 
 import Header from './header';
 import Home from './home';
-import Profile from './profile';
+import About from './profile';
 
 export default class App extends Component {
 	/** Gets fired when the route changes.
@@ -20,6 +20,7 @@ export default class App extends Component {
 				<Header />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
+					<About path="/about/"/>
 				</Router>
 				<center> Plenty of inspiration from <a href="http://webkay.robinlinus.com/">webkay</a></center>
 			</div>
