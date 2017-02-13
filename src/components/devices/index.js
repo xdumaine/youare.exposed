@@ -7,11 +7,14 @@ export default class Devices extends Component {
 		outputs: 0,
 		mics: 0,
 		cameras: 0,
-		enabled: false
+		enabled: true
 	};
 
 	componentDidMount() {
-		this.setState({ enabled: true });
+		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+			this.setState({ enabled: false });
+			return;
+		}
 		navigator.mediaDevices.enumerateDevices()
 			.then(devices => {
 				this.setState({ outputs: devices.filter(d => d.kind === 'audiooutput' && d.deviceId !== 'default').length });
@@ -28,7 +31,12 @@ export default class Devices extends Component {
 	// Note: `user` comes from the URL, courtesy of our router
 	render({}, { enabled, cameras, mics, outputs }) {
 		if (!enabled) {
-			return null;
+			return (
+				<div class={style.devices}>
+					Media hardware information unavailable
+					<pre>(navigator.mediaDevices)</pre>
+				</div>
+			);
 		}
 		return (
 			<div class={style.devices}>

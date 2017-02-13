@@ -4,7 +4,8 @@ import style from './style';
 export default class DoNotTrack extends Component {
 	state = {
 		localIp: 'unknown',
-		publicIp: 'unknown'
+		publicIp: 'unknown',
+		enabled: true
 	};
 
 	gotCandidate(evt) {
@@ -26,6 +27,10 @@ export default class DoNotTrack extends Component {
 	}
 
 	componentDidMount() {
+		if (!window.RTCPeerConnection) {
+			this.setState({ enabled: false });
+			return;
+		}
 		const config = {
 			iceServers: [
 				{
@@ -66,7 +71,16 @@ export default class DoNotTrack extends Component {
 	}
 
 	// Note: `user` comes from the URL, courtesy of our router
-	render({}, { localIp, publicIp }) {
+	render({}, { localIp, publicIp, enabled }) {
+		console.log('rendering', enabled);
+		if (!enabled) {
+			return (
+				<div class={style.ipaddresses}>
+					No IP address information available from client
+					<pre>(RTCPeerConnection)</pre>
+				</div>
+			);
+		}
 
 		const enabledClass = this.state.enabled ? 'enabled' : 'disabled'
 		return (

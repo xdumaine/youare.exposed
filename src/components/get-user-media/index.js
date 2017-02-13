@@ -9,7 +9,7 @@ export default class GetUserMedia extends Component {
 	};
 
 	componentDidMount() {
-		this.setState({ enabled: !!navigator.mediaDevices.getUserMedia });
+		this.setState({ enabled: !!navigator.mediaDevices && !!navigator.mediaDevices.getUserMedia });
 		this.startMedia = this._startMedia.bind(this);
 	}
 
@@ -24,7 +24,6 @@ export default class GetUserMedia extends Component {
 			});
 	}
 
-	// Note: `user` comes from the URL, courtesy of our router
 	render({}, { enabled, stream, pending }) {
 		if (!enabled) {
 			return null;

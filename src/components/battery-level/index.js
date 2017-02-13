@@ -4,7 +4,8 @@ import style from './style';
 export default class BatteryLevel extends Component {
 	state = {
 		level: 1,
-		charging: false
+		charging: false,
+		enabled: true
 	};
 
 	updateAllBatteryInfo() {
@@ -38,6 +39,11 @@ export default class BatteryLevel extends Component {
 	}
 
 	componentDidMount() {
+		if (!navigator.getBattery) {
+			this.setState({ enabled: false });
+			return;
+		}
+
 		navigator.getBattery().then((battery) => {
 		  	this.battery = battery;
 			this.updateAllBatteryInfo();
@@ -48,17 +54,19 @@ export default class BatteryLevel extends Component {
 		});
 	}
 
-	// gets called just before navigating away from the route
-	componentWillUnmount() {
-		clearInterval(this.timer);
-	}
+	render({}, { level, charging, enabled }) {
+		if (!enabled) {
+			return (
+				<div class={style.battery}>
+					Battery information not available
+					<pre>navigator.getBattery</pre>
+				</div>
+			);
+		}
 
-	// Note: `user` comes from the URL, courtesy of our router
-	render({}, { level, charging }) {
 		const battery = charging ? 'battery_charging_full' : (level < 0.3 ? 'battery_alert' : 'battery_std');
 		return (
 			<div class={style.battery}>
-
 				<meter max="1.0" min="0.0" value={ level } low=".30" optimum="0.5"></meter>
 				<label><icon class="ico">{ battery }</icon> { level * 100 }%
 				</label>
